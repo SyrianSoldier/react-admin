@@ -1,9 +1,11 @@
-import React, {memo, FC} from 'react';
+import React, { FC } from 'react'
+import { Spin } from 'antd'
+import PermissionRoues from '@/permission'
 
-interface AppProps{}
-
-const App:FC<AppProps> = memo(() =>
-  <div>我是App</div>
+const App: FC = () => (
+  <React.Suspense fallback={<Spin tip="Loading..." size="large"></Spin>}>
+    <PermissionRoues />
+  </React.Suspense>
 )
 
-export default App;
+export default App

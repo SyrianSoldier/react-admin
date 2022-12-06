@@ -4,6 +4,7 @@ module.exports = {
   rules: {
     'import/no-unresolved': 0,
     'import/extensions': 0,
-    'default-param-last': 0
+    'default-param-last': 0,
+    'import/no-extraneous-dependencies': 0
   }
 }
