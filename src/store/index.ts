@@ -14,9 +14,13 @@ const store = createStore(
 
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export type PayloadAction<T = any, P = any> = {
-  type: T
-  payload: P
-}
+export type PayloadAction<T, P = undefined> = P extends undefined
+  ? {
+      type: T
+    }
+  : {
+      type: T
+      payload: P
+    }
 
 export default store

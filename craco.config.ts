@@ -1,4 +1,3 @@
-// @ts-ignore
 const path = require('path')
 const interpolateHtml = require('craco-interpolate-html-plugin')
 const defaultSettings = require('./src/settings')
@@ -18,6 +17,7 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://ihrm.itheima.net',
+        // target: 'http://liufusong.top:3000',
         changeOrigin: true
       }
     }
@@ -32,3 +32,4 @@ module.exports = {
     }
   ]
 }
+export default {}

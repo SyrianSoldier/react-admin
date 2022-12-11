@@ -7,9 +7,7 @@ import { LoginRules, LoginForm } from '@/types'
 import { useAppDispatch } from '@/hooks'
 import { loginAction } from '@/store/modules/user/action-creator'
 
-interface LoginProps {}
-
-const Login: FC<LoginProps> = memo(() => {
+const Login: FC = memo(() => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

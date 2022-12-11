@@ -1,11 +1,6 @@
 import React, { FC } from 'react'
-import { Spin } from 'antd'
-import PermissionRoues from '@/permission'
+import usePermissionRoutes from '@/permission'
 
-const App: FC = () => (
-  <React.Suspense fallback={<Spin tip="Loading..." size="large"></Spin>}>
-    <PermissionRoues />
-  </React.Suspense>
-)
+const App: FC = () => <>{usePermissionRoutes()}</>
 
 export default App

@@ -1,4 +1,3 @@
-// @ts-ignore
 interface SettingsType {
   title: string
 }
@@ -9,3 +8,4 @@ const settings: SettingsType = {
 }
 
 module.exports = settings
+export default settings

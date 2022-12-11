@@ -1,15 +1,27 @@
-import { SET_TOKEN, REMOVE_TOKEN } from '@/store/modules/user/constants'
+import {
+  SET_TOKEN,
+  REMOVE_TOKEN,
+  SET_USER_INFO
+} from '@/store/modules/user/constants'
 import { AppDispatch } from '@/store'
-import { LoginForm } from '@/types'
-import { login } from '@/api'
+import { BaseUserInfoType, LoginForm, UserInfoType } from '@/types'
+import { getBaseUserInfo, getUserInfo, login } from '@/api'
+
+export type UserInfoUnionType = Partial<
+  UserInfoType['data'] & BaseUserInfoType['data']
+>
 
 export const setTokenAction = (payload: string) => ({
   type: SET_TOKEN as 'SET_TOKEN',
   payload
 })
 
-export const removeTokenAction = (payload: never) => ({
-  type: REMOVE_TOKEN as 'REMOVE_TOKEN',
+export const removeTokenAction = () => ({
+  type: REMOVE_TOKEN as 'REMOVE_TOKEN'
+})
+
+export const setUserInfoAction = (payload: UserInfoUnionType) => ({
+  type: SET_USER_INFO as 'SET_USER_INFO',
   payload
 })
 
@@ -18,3 +30,10 @@ export const loginAction =
     const { data } = await login(loginForm)
     dispatch(setTokenAction(data.data))
   }
+
+export const setUserInfoThunk = () => async (dispatch: AppDispatch) => {
+  const { data: infoData } = await getUserInfo()
+  const { data: baseData } = await getBaseUserInfo(infoData.data.userId)
+
+  dispatch(setUserInfoAction({ ...infoData.data, ...baseData.data }))
+}
