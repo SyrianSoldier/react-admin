@@ -11,19 +11,22 @@ export type UserInfoUnionType = Partial<
   UserInfoType['data'] & BaseUserInfoType['data']
 >
 
-export const setTokenAction = (payload: string) => ({
-  type: SET_TOKEN as 'SET_TOKEN',
-  payload
-})
+export const setTokenAction = (payload: string) =>
+  ({
+    type: SET_TOKEN,
+    payload
+  } as const)
 
-export const removeTokenAction = () => ({
-  type: REMOVE_TOKEN as 'REMOVE_TOKEN'
-})
+export const removeTokenAction = () =>
+  ({
+    type: REMOVE_TOKEN
+  } as const)
 
-export const setUserInfoAction = (payload: UserInfoUnionType) => ({
-  type: SET_USER_INFO as 'SET_USER_INFO',
-  payload
-})
+export const setUserInfoAction = (payload: UserInfoUnionType) =>
+  ({
+    type: SET_USER_INFO,
+    payload
+  } as const)
 
 export const loginAction =
   (loginForm: LoginForm) => async (dispatch: AppDispatch) => {

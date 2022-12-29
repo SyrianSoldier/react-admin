@@ -1,4 +1,4 @@
-import type { RouteObject } from 'react-router-dom'
+import type { NonIndexRouteObject } from 'react-router-dom'
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
@@ -16,7 +16,8 @@ import SettingRoute from '@/router/modules/setting'
 import SocialRoute from '@/router/modules/social'
 
 const Dashboard = lazy(() => import('@/views/dashboard'))
-export type MyRouteObject = RouteObject & {
+const ImportExcel = lazy(() => import('@/views/import-excel'))
+export type MyRouteObject = Omit<NonIndexRouteObject, 'children'> & {
   hidden?: boolean
   meta?: {
     title?: string
@@ -46,6 +47,17 @@ const constantRoutes: MyRouteObject[] = [
     path: '/login',
     element: <Login />,
     hidden: true
+  },
+  {
+    path: '/import',
+    element: <Layout />,
+    hidden: true,
+    children: [
+      {
+        path: '',
+        element: <ImportExcel />
+      }
+    ]
   },
   {
     path: '*',

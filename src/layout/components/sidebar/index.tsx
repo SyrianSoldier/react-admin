@@ -78,7 +78,8 @@ const routesToMenuItems = (
       target?.push(menuItem)
     }
   })
-  return target
+
+  return target.length > 0 ? target : undefined
 }
 
 interface SideBarProps {
@@ -87,9 +88,9 @@ interface SideBarProps {
 
 const SideBar: FC<SideBarProps> = memo(({ collapsed }) => {
   const navigate = useNavigate()
-  const items = routesToMenuItems(routes)
-  const onMenuItem: MenuProps['onSelect'] = ({ key }) => navigate(key)
+  const onMenuItem: MenuProps['onSelect'] = ({ key: path }) => navigate(path)
   const location = useLocation()
+  const items = routesToMenuItems(routes)
 
   return (
     <SideBarWrapper>

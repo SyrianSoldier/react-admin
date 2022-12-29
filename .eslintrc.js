@@ -22,6 +22,7 @@ module.exports = {
     'arrow-body-style': 1,
     '@typescript-eslint/ban-types': 1,
     '@typescript-eslint/no-empty-interface': 1,
-    'no-param-reassign': 1
+    'no-param-reassign': 1,
+    'no-plusplus': 0
   }
 }
