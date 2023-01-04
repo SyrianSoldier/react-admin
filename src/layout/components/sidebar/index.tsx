@@ -4,7 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import SideBarWrapper from './style'
 import Logo from '@/layout/components/sidebar/logo'
-import routes, { MyRouteObject } from '@/router'
+import { MyRouteObject } from '@/router'
+import { useAppSelector } from '@/hooks'
 
 const { Sider } = LayoutAntd
 
@@ -90,6 +91,7 @@ const SideBar: FC<SideBarProps> = memo(({ collapsed }) => {
   const navigate = useNavigate()
   const onMenuItem: MenuProps['onSelect'] = ({ key: path }) => navigate(path)
   const location = useLocation()
+  const routes = useAppSelector(state => state.permission.routes)
   const items = routesToMenuItems(routes)
 
   return (

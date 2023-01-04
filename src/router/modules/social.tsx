@@ -6,7 +6,7 @@ const Social = lazy(() => import('@/views/social'))
 
 export default {
   path: '/social',
-  id: 'social',
+  id: 'social_securitys',
   element: <Layout />,
   children: [
     {

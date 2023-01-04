@@ -32,9 +32,23 @@ const Operate: FC<OperateProps> = memo(({ rowData, getRoleList }) => {
     })
   }
 
+  const assignPermision = () => {
+    console.log(1)
+
+    setValue({
+      ...value,
+      isAssignPermissionOpen: true,
+      currentRole: rowData.record
+    })
+  }
+
   return (
     <Space>
-      <Button type="primary" style={{ background: '#67c23a', color: '#fff' }}>
+      <Button
+        type="primary"
+        style={{ background: '#67c23a', color: '#fff' }}
+        onClick={assignPermision}
+      >
         分配权限
       </Button>
 

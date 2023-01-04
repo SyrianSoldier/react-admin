@@ -84,8 +84,8 @@ const AddDepts: FC<AddDeptsProps> = memo(
 
       if (deptsContextProps.isDeptEdit) {
         await editDepartmentApi({
-          ...values,
-          ...deptsContextProps.currentTreeNode!
+          ...deptsContextProps.currentTreeNode!,
+          ...values
         })
       } else {
         await addDepartmentApi({
@@ -98,7 +98,12 @@ const AddDepts: FC<AddDeptsProps> = memo(
 
       message.destroy()
 
-      message.success(`添加${values.name}部门成功!`, 3)
+      message.success(
+        `${deptsContextProps.isDeptEdit ? '编辑' : '添加'}${
+          values.name
+        }部门成功!`,
+        3
+      )
 
       onCancel()
     }

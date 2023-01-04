@@ -29,3 +29,11 @@ export type UpdateRoleData = {
   name: string
   permIds: string[]
 }
+
+export type GetRoleDetailRes = AddBase<{
+  companyId: string
+  description: string
+  id: string
+  name: string
+  permIds: string[]
+}>

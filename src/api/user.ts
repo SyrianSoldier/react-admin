@@ -15,4 +15,7 @@ export const getUserInfo = () => request.post<UserInfoType>('/sys/profile')
 export const getBaseUserInfo = (id: string) =>
   request.get<BaseUserInfoType>(`/sys/user/${id}`)
 
+export const assignPermissionApi = (data: { id: string; roleIds: string[] }) =>
+  request.put<unknown>('/sys/user/assignRoles', data)
+
 export default {}

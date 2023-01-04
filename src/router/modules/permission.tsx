@@ -6,7 +6,7 @@ const Permission = lazy(() => import('@/views/permission'))
 
 export default {
   path: '/permission',
-  id: 'permission',
+  id: 'permissions',
   element: <Layout />,
   children: [
     {

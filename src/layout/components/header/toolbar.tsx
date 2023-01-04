@@ -8,6 +8,7 @@ import {
   removeTokenAction,
   setUserInfoAction
 } from '@/store/modules/user/action-creator'
+import { resetRoutes } from '@/store/modules/permission/action-creators'
 
 const Toolbar: FC = memo(() => {
   const userInfo = useAppSelector(state => state.user.userInfo, shallowEqual)
@@ -17,6 +18,7 @@ const Toolbar: FC = memo(() => {
   const logout = () => {
     dispatch(setUserInfoAction({})) // 清除用户信息
     dispatch(removeTokenAction()) // 清除token
+    dispatch(resetRoutes()) // 清楚路由
     navigate('/login') // 回到登录页
   }
   const items: MenuProps['items'] = [

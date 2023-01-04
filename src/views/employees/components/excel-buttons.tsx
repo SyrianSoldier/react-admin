@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { useEmployeeState } from '@/views/employees'
 import { getEmployeesApi } from '@/api'
 import { HeadersMap } from '@/api/constant'
+import usePointPermission from '@/hooks/usePointPermission'
+import * as POINTS from '@/api/constant/points'
 
 interface ExcelButtonsProps {
   total: number
@@ -16,6 +18,8 @@ const EnToZHHeadersMap = Object.fromEntries(
 
 const ExcelButtons: FC<ExcelButtonsProps> = memo(({ total }) => {
   const [employeeState, setEmployeeState] = useEmployeeState()!
+  const [isShowAdd] = usePointPermission(POINTS.EMPLOYEE_ADD)
+
   const navigate = useNavigate()
   const addEmployee = () => {
     setEmployeeState({
@@ -78,9 +82,11 @@ const ExcelButtons: FC<ExcelButtonsProps> = memo(({ total }) => {
         >
           excel导入
         </Button>
-        <Button type={'primary'} onClick={addEmployee}>
-          新增员工
-        </Button>
+        {isShowAdd && (
+          <Button type={'primary'} onClick={addEmployee}>
+            新增员工
+          </Button>
+        )}
       </Space>
     </>
   )

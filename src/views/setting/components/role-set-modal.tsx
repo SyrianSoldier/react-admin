@@ -12,10 +12,10 @@ const RoleSetModal: FC = memo(() => {
   const [form] = useForm()
 
   useEffect(() => {
-    if (value.isSetRoleModalOpen) {
+    if (value.isSetRoleModalOpen && value.isEdit) {
       form.setFieldsValue(value.currentRole)
     }
-  }, [value.currentRole])
+  }, [value.isSetRoleModalOpen])
 
   const onCancel = () => {
     form.resetFields(['name', 'description'])

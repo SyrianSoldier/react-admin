@@ -4,7 +4,8 @@ import {
   BatchImportEmployeeData,
   EmployeeSimpleRes,
   GetEmployeesParams,
-  GetEmployeesRes
+  GetEmployeesRes,
+  GetRoleDetailRes
 } from '@/types'
 
 export const getEmployeeSimple = () =>
@@ -24,4 +25,5 @@ export const batchImportEmployeeApi = (data: BatchImportEmployeeData) =>
     '/sys/user/batch',
     data
   )
+
 export default {}

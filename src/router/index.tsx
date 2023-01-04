@@ -17,6 +17,8 @@ import SocialRoute from '@/router/modules/social'
 
 const Dashboard = lazy(() => import('@/views/dashboard'))
 const ImportExcel = lazy(() => import('@/views/import-excel'))
+const Print = lazy(() => import('@/views/employees/components/print'))
+
 export type MyRouteObject = Omit<NonIndexRouteObject, 'children'> & {
   hidden?: boolean
   meta?: {
@@ -26,7 +28,7 @@ export type MyRouteObject = Omit<NonIndexRouteObject, 'children'> & {
   children?: MyRouteObject[]
 }
 
-const constantRoutes: MyRouteObject[] = [
+export const constantRoutes: MyRouteObject[] = [
   {
     path: '/',
     element: <Navigate to={'/dashboard'} />,
@@ -60,9 +62,15 @@ const constantRoutes: MyRouteObject[] = [
     ]
   },
   {
-    path: '*',
-    element: <NotFoundPage />,
-    hidden: true
+    path: '/print',
+    element: <Layout />,
+    hidden: true,
+    children: [
+      {
+        path: '',
+        element: <Print />
+      }
+    ]
   }
 ]
 
@@ -74,7 +82,10 @@ export const dynamicRoutes: MyRouteObject[] = [
   PermissionRoute,
   SalarysRoute,
   SettingRoute,
-  SocialRoute
+  SocialRoute,
+  {
+    path: '*',
+    element: <NotFoundPage />,
+    hidden: true
+  }
 ]
-
-export default [...constantRoutes, ...dynamicRoutes]

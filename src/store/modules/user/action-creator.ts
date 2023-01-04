@@ -37,6 +37,8 @@ export const loginAction =
 export const setUserInfoThunk = () => async (dispatch: AppDispatch) => {
   const { data: infoData } = await getUserInfo()
   const { data: baseData } = await getBaseUserInfo(infoData.data.userId)
+  const mergeData = { ...infoData.data, ...baseData.data }
 
-  dispatch(setUserInfoAction({ ...infoData.data, ...baseData.data }))
+  dispatch(setUserInfoAction(mergeData))
+  return mergeData
 }

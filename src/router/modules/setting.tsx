@@ -6,7 +6,7 @@ const Setting = lazy(() => import('@/views/setting'))
 
 export default {
   path: '/setting',
-  id: 'setting',
+  id: 'settings',
   element: <Layout />,
   children: [
     {

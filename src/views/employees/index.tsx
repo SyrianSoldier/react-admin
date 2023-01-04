@@ -22,11 +22,14 @@ import { Employee } from '@/types'
 import { getEmployeesApi } from '@/api'
 import { HireType, WorkingState } from '@/api/constant'
 import AddEmployeeModal from './components/add-employee-modal'
+import AddRoleModal from './components/add-role-modal'
 
 const Table = withPagination<Employee>(AntdTable)
 
 interface EmployeeState {
   isAddEmployeeModalOpen: boolean
+  isAddRoleModalOpen: boolean
+  currentEmployee?: Employee
   getEmployees: () => Promise<void>
 }
 
@@ -73,6 +76,7 @@ const Employees: FC<EmployeesProps> = memo(() => {
 
   const employeesState = useState({
     isAddEmployeeModalOpen: false,
+    isAddRoleModalOpen: false,
     getEmployees
   })
 
@@ -176,6 +180,7 @@ const Employees: FC<EmployeesProps> = memo(() => {
       />
 
       <AddEmployeeModal />
+      <AddRoleModal />
     </EmployeeContext.Provider>
   )
 })

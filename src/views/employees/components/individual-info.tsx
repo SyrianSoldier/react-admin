@@ -2,7 +2,6 @@ import React, { memo, FC } from 'react'
 import {
   Button,
   DatePicker,
-  Divider,
   Form,
   Image,
   Input,
@@ -10,13 +9,18 @@ import {
   Space,
   TreeSelect
 } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 const { Item } = Form
 interface IndividualInfoProps {}
 
 const IndividualInfo: FC<IndividualInfoProps> = memo(() => {
+  const naviage = useNavigate()
   return (
     <>
+      <Button type="primary" onClick={() => naviage('/print')}>
+        打印
+      </Button>
       <Form labelAlign={'left'} size={'small'} wrapperCol={{ span: 8 }}>
         <Item label={'工号'}>
           <Input></Input>
