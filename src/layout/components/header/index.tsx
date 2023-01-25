@@ -4,6 +4,7 @@ import { Layout } from 'antd'
 import HeaderWrapper from './style'
 import Hamburger from '@/components/hamburger'
 import Toolbar from './toolbar'
+import useLocale from '@/hooks/useLocale'
 
 const { Header: HeaderAntd } = Layout
 
@@ -13,6 +14,7 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = memo(({ collapsed, setCollapsed }) => {
+  const [local] = useLocale()
   return (
     <HeaderWrapper>
       <HeaderAntd>
@@ -25,8 +27,8 @@ const Header: FC<HeaderProps> = memo(({ collapsed, setCollapsed }) => {
 
         {/* 公司描述 */}
         <div className="text">
-          <span className="company-text">江苏传智播客教育科技股份有限公司</span>
-          <span className="breadBtn">体验版</span>
+          <span className="company-text">{local.custom.companyName}</span>
+          <span className="breadBtn">{local.custom.version}</span>
         </div>
 
         {/* 右侧工具栏 */}

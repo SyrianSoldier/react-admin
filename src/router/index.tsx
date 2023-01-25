@@ -36,6 +36,7 @@ export const constantRoutes: MyRouteObject[] = [
   },
   {
     path: '/dashboard',
+    id: 'dashboard',
     element: <Layout />,
     children: [
       {

@@ -6,6 +6,8 @@ import SideBarWrapper from './style'
 import Logo from '@/layout/components/sidebar/logo'
 import { MyRouteObject } from '@/router'
 import { useAppSelector } from '@/hooks'
+import { LocalExpand } from '@/locals/local'
+import useLocale from '@/hooks/useLocale'
 
 const { Sider } = LayoutAntd
 
@@ -13,7 +15,7 @@ const { Sider } = LayoutAntd
  * 返回值为数组[boolean,number]
  * 第一项是否包含默认子路由, 第二项为默认子路由的下标
  * */
-const hasDefaultChildRoute = (
+export const hasDefaultChildRoute = (
   childrenRoutes: MyRouteObject[]
 ): [boolean, number] => {
   let result: [boolean, number] = [false, -1]
@@ -30,14 +32,17 @@ const hasDefaultChildRoute = (
 const routesToMenuItems = (
   // eslint-disable-next-line no-shadow
   routes: MyRouteObject[],
-  target: MenuProps['items'] = []
+  target: MenuProps['items'] = [],
+  locale?: LocalExpand
 ): MenuProps['items'] => {
   routes.forEach(route => {
     if (!route.hidden) {
       let menuItem = {} as any
 
       if (route.meta?.title) {
-        menuItem.label = route.meta.title
+        menuItem.label = locale
+          ? locale.custom[route.id as keyof LocalExpand['custom']]
+          : route.meta.title
       }
 
       if (route.meta?.icon) {
@@ -58,7 +63,9 @@ const routesToMenuItems = (
 
           menuItem = {
             ...menuItem,
-            label: defaultChildRoute.meta?.title,
+            label: locale
+              ? locale.custom[route.id as keyof LocalExpand['custom']]
+              : defaultChildRoute.meta?.title,
             icon: (
               <i
                 className={`iconfont icon-${defaultChildRoute.meta?.icon}`}
@@ -92,7 +99,8 @@ const SideBar: FC<SideBarProps> = memo(({ collapsed }) => {
   const onMenuItem: MenuProps['onSelect'] = ({ key: path }) => navigate(path)
   const location = useLocation()
   const routes = useAppSelector(state => state.permission.routes)
-  const items = routesToMenuItems(routes)
+  const [locale] = useLocale()
+  const items = routesToMenuItems(routes, [], locale)
 
   return (
     <SideBarWrapper>
@@ -106,7 +114,7 @@ const SideBar: FC<SideBarProps> = memo(({ collapsed }) => {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[location.pathname]}
+          selectedKeys={[location.pathname]}
           items={items}
           onSelect={onMenuItem}
         ></Menu>

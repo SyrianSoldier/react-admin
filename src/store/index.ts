@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import user from '@/store/modules/user/reducer'
 import permission from './modules/permission/reducer'
+import local from './modules/local/reducer'
 
 const rootReducer = combineReducers({
   user,
-  permission
+  permission,
+  local
 })
 
 const store = createStore(
